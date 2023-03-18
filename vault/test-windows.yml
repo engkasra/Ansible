@@ -1,0 +1,25 @@
+---
+   - name: alaki
+     hosts:
+       windows
+     vars:
+       ansible_user: k.abdollahi
+       ansible_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          61626439656430663563656366336466376234353830373337613830303535663063646365363331
+          3937383064343330666139333139303134626536613031310a633564666334626539636430653735
+          30303538663137636135323130313330393664656238663163666130343466646661376139626562
+          6438336537353636620a353863346133663565613266616565633066333037666339626139393065
+          6165
+       ansible_port: 5986
+       ansible_connection: winrm
+       ansible_winrm_transport: basic
+       ansible_winrm_server_cert_validation: ignore
+     gather_facts: false
+     tasks:
+      - name: "Ping Windows Hosts"
+        win_ping:
+      - name: "create dir test"
+        win_file:
+           path: D:\testdir
+           state: directory
