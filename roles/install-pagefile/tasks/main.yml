@@ -1,0 +1,13 @@
+---
+  - name: ----- Configure pagefile for drive C -----
+    win_pagefile:
+      automatic: no
+      drive: C
+      initial_size: 1024
+      maximum_size: 2048
+      state: present
+  - name: ----- configu pagefile for dive P -----
+    win_pagefile:
+       drive: P
+       system_managed: yes
+       state: present

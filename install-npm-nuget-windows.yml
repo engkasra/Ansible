@@ -1,0 +1,5 @@
+- name: ----- Config NuGet and NPM for windows -----
+  gather_facts: false
+  hosts: windows
+  roles:
+      - install-npm-nuget-windows

@@ -1,0 +1,74 @@
+---
+  - name: Create directory=> "{{ dest_path_npm_systembase }}"
+    win_file:
+      path: "{{ dest_path_npm_systembase }}"
+      state: directory
+    tags: create-dir-npm-system
+############
+  - name: Create directory=> "{{ dest_path_npm_userbase }}"
+    win_file:
+       path: "{{ dest_path_npm_userbase }}"
+       state: directory
+    tags: create-dir-npm-user
+############
+  - name: Create directory => "{{ npm_cache_dir  }}"
+    win_file:
+       path: "{{ npm_cache_dir }}"
+       state: directory
+    tags: create-dir-npm-cache
+############
+  - name: Copy NPM config file
+    ansible.windows.win_copy:
+       src: "{{ item.src }}"
+       dest: "{{ item.dest }}"
+    loop:
+       - src: "{{ src_path_npm_file }}"
+         dest: "{{ dest_path_npm_userbase}}"
+       - src: "{{ src_path_npm_file }}"
+         dest: "{{ dest_path_npm_systembase }}"
+    tags: copy-npm-config
+############
+  - name: Create directory=> "{{ dest_path_nuget }}"
+    win_file:
+       path: "{{ dest_path_nuget }}"
+       state: directory
+    tags: create-dir-nuget
+############
+  - name: Create directory => "{{ nuget_packages_dir }}"
+    win_file:
+       path: "{{ nuget_packages_dir }}"
+       state: directory
+    tags: create-dir-nuget-packages
+############
+  - name: Copy NuGet config file
+    ansible.windows.win_copy:
+      src: "{{ src_path_nuget_file }}"
+      dest: "{{ dest_path_nuget }}"
+    tags: copy-nuget-config
+############
+  - name: Set enviroment for NuGet
+    win_environment:
+      state: present
+      name: NUGET_PACKAGES
+      value: 'D:\NugetPackages'
+      level: machine
+    tags: set-env-nuget
+############
+  - name: Set permission access to => "{{ npm_cache_dir }}"
+    ansible.windows.win_acl:
+      user: NETWORK SERVICE
+      path: "{{ npm_cache_dir }}"
+      type: allow
+      state: present
+      rights: FullControl
+    tags: set-permission-npm-cache
+############                                                                                                       │
+  - name: Set permission access to => "{{ nuget_packages_dir }}"                                                                            │
+    ansible.windows.win_acl:                                                                                       │
+      user: NETWORK SERVICE                                                                                        │
+      path: "{{ nuget_packages_dir }}"                                                                                  │
+      type: allow                                                                                                  │
+      state: present                                                                                               │
+      rights: FullControl                                                                                          │
+    tags: set-permission-nuget-packages                                                                            │
+############  

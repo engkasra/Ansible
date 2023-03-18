@@ -1,0 +1,18 @@
+---
+
+- name: ----- Create Directory=> "{{ dest_path }}" -----
+  win_file:
+      path: "{{ dest_path }}"
+      state: directory
+  tags: create-dir
+#####
+- name: ----- Download packages from local repository -----
+  ansible.windows.win_get_url:
+       url: "{{ src_download }}"
+       dest: "{{ dest_path }}"
+       validate_certs: false
+  tags: download-file
+#####
+- name: ----- Install git on windows -----
+  raw: 'C:\Software\Git-2.39.2-64-bit.exe /SILENT /COMPONENTS="icons,ext\reg\shellhere,assoc,assoc_sh"'
+  tags: install-file

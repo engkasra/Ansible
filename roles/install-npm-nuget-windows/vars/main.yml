@@ -1,0 +1,7 @@
+dest_path_npm_systembase: C:\Program Files\nodejs\node_modules\npm
+dest_path_npm_userbase: C:\Windows\ServiceProfiles\NetworkService\AppData\Roaming\npm
+dest_path_nuget: C:\Program Files (x86)\NuGet\Config
+src_path_npm_file: /home/ansible/roles/config-npm-windows-server/files/.npmrc
+src_path_nuget_file: /home/ansible/roles/config-npm-windows-server/files/NuGet.Config
+npm_cache_dir: D:\npm-cache
+nuget_packages_dir: D:\NugetPackages

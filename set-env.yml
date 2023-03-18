@@ -1,0 +1,17 @@
+---
+
+#  - name: Ansible playbook to retrieve environment variables on windows servers.
+#    hosts: windows
+#    tasks:
+#    - debug:
+#        msg: "{{ansible_env}}"
+
+  - name: Adding environment variable at the machine level
+    hosts: windows
+    tasks:
+     -  win_environment:
+         state: present
+         name: TestEnv
+         value: 'TestValue'
+         level: machine
+#    tags: add-env

@@ -1,0 +1,5 @@
+---
+  - name: Reboot Windows Server
+    win_reboot:
+      msg: "Restart the server 3 seconds later"
+      post_reboot_delay: 3

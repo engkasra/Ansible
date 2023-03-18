@@ -1,0 +1,66 @@
+# This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+
+# Ex 1: Ungrouped hosts, specify before any group headers:
+
+## green.example.com
+## blue.example.com
+## 192.168.100.1
+## 192.168.100.10
+
+# Ex 2: A collection of hosts belonging to the 'webservers' group:
+
+## [webservers]
+## alpha.example.org
+## beta.example.org
+## 192.168.1.100
+## 192.168.1.110
+#[linux]
+#192.168.195.137
+[windows]
+winserver ansible_host=192.168.195.130
+[windows:vars]
+ansible_user=k.abdollahi
+ansible_password= $ANSIBLE_VAULT;1.1;AES256
+34613236623439363165363639313663353464383063636335306666616462316636323564383435
+3839613964326431393837353963393462353466383132380a313333306333376132343030323464
+35313262656262656665623339663163646661363166623230623531396539663133303039343633
+3835666365336430300a643731613564666161376231366633386433656635653562326539393538
+3964
+
+ansible_port=5986
+#ansible_port=22
+#ansible_ssh_common_args: '-o StrictHostKeyChecking=False -o UserKnownHostsFile=/dev/null'
+#ansible_ssh_retries: 3
+#ansible_shell_type: powershell
+#ansible_become_method: runas
+#ansible_become_user: "{{ ansible_user }}"
+ansible_connection=winrm
+ansible_winrm_transport=basic
+ansible_winrm_server_cert_validation=ignore
+# If you have multiple hosts following a pattern, you can specify
+# them like this:
+
+## www[001:006].example.com
+
+# Ex 3: A collection of database servers in the 'dbservers' group:
+
+## [dbservers]
+##
+## db01.intranet.mydomain.net
+## db02.intranet.mydomain.net
+## 10.25.1.56
+## 10.25.1.57
+
+# Here's another example of host ranges, this time there are no
+# leading 0s:
+
+## db-[99:101]-node.example.com
+
