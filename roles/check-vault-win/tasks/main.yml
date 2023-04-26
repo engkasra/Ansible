@@ -1,0 +1,8 @@
+---
+
+- name: ---- Test Ping ----
+  win_ping:
+- name: ---- Create dir test ----
+  win_file:
+     path: D:\testdir2
+     state: directory
